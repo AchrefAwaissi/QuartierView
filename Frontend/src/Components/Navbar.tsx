@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 const navLinks = [
   { title: "Home", path: "/" },
   { title: "About", path: "/about" },
+  { title: "Publier", path: "/PostAnnonce" }
+
 ];
 
 export default function NavBar() {

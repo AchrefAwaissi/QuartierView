@@ -1,9 +1,10 @@
 import React from 'react';
+import SearchAnnonce from './SearchAnnonce';
 
 const About = () => {
   return (
     <div>
-      hello
+     <SearchAnnonce></SearchAnnonce>
     </div>
   );
 }

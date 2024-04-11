@@ -37,7 +37,7 @@ const SearchAnnonce = () => {
   
     const handleSearch = async () => {
       try {
-        let apiUrl = 'http://localhost:3000/api/logements';
+        let apiUrl = 'http://localhost:3000/api/annonce';
   
         if (ville && prixMax) {
           apiUrl += `?ville=${encodeURIComponent(ville)}&price=${encodeURIComponent(prixMax)}`;
