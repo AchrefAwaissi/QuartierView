@@ -3,6 +3,7 @@ const router = express.Router();
 const produitCtrl = require('../controllers/Annonce');
 
 
-router.post('/add-produit',produitCtrl.createAnnonce)
+router.post('/add-annonce',produitCtrl.createAnnonce)
+router.put('/update-annonce/:id',produitCtrl.updateAnnonce)
 
 module.exports = router;
