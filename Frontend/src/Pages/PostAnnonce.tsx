@@ -10,7 +10,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios'; // Import Axios
- 
+import { useNavigate } from 'react-router-dom';
+
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -27,6 +28,7 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
  
 export default function Publish() {
+  const navigate = useNavigate();
   const [title, setTitle] = React.useState('');
   const [address, setAddress] = React.useState('');
   const [price, setPrice] = React.useState<number | null>(null); // Initialize price to null
@@ -39,6 +41,7 @@ export default function Publish() {
       setTitle('');
       setAddress('');
       setPrice(null); // Reset price to null after form submission
+      navigate('/'); // Use navigate to redirect to homepage
     } catch (error) {
       console.error(error);
     }
