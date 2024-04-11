@@ -1,12 +1,10 @@
 import React from 'react';
-import PostAnnonce from './PostAnnonce';
-import { ListAlt } from '@mui/icons-material';
-import ListeAnnonce from './ListeAnnonce';
+import Filter from './Filter';
 
 const Home = () => {
   return (
     <div>
-        <ListeAnnonce></ListeAnnonce>
+        <Filter></Filter>
      </div>
   );
 }

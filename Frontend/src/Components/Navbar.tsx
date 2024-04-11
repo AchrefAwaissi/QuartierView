@@ -11,8 +11,8 @@ import Tooltip from '@mui/material/Tooltip';
 import { Link } from "react-router-dom";
 
 const navLinks = [
-  { title: "Home", path: "/" },
-  { title: "About", path: "/about" },
+  { title: "Acceuil", path: "/" },
+  { title: "Annonces", path: "/ListeAnnonce" },
   { title: "Publier", path: "/PostAnnonce" }
 
 ];

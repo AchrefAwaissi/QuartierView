@@ -41,7 +41,7 @@ export default function Publish() {
       setTitle('');
       setAddress('');
       setPrice(null); // Reset price to null after form submission
-      navigate('/'); // Use navigate to redirect to homepage
+      navigate('/ListeAnnonce'); // Use navigate to redirect to homepage
     } catch (error) {
       console.error(error);
     }
