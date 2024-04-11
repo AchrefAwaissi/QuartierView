@@ -1,4 +1,4 @@
-import { Card, CardActions, CardContent, Typography, Button, CardMedia, Container } from '@mui/material';
+import { Card, CardActions, CardContent, Typography, Button, CardMedia, Container, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -16,25 +16,29 @@ const ListeAnnonce = () => {
     }, []);
 
     return (
-        <Container>
-            {logements.map((logement, index) => (
-                <Card key={index} sx={{ maxWidth: 345, margin: '20px auto' }}>
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            {logement.title}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {logement.description}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {logement.address} - {logement.price}€
-                        </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Button size="small">Voir plus</Button>
-                    </CardActions>
-                </Card>
-            ))}
+        <Container maxWidth="lg" style={{ marginTop: '30px' }}>  {/* Set a larger container width */}
+            <Grid container spacing={2}>  {/* Use Grid for responsive layout */}
+                {logements.map((logement, index) => (
+                    <Grid item xs={12} sm={4} md={4} lg={4} key={index}>  {/* Adjust column size based on screen size */}
+                        <Card sx={{ maxWidth: 345 }}>
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">
+                                    {logement.title}
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    {logement.description}
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    {logement.address} - {logement.price}€
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small">Voir plus</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                ))}
+            </Grid>
         </Container>
     );
 }
