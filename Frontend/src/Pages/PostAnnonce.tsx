@@ -46,7 +46,7 @@ export default function Publish() {
  
   const insertData = async (title: string, address: string, price: number | null) => {
     try {
-      const response = await axios.post('http://localhost:3000/api/annonce/add-produit', { title, address, price });
+      const response = await axios.post('http://localhost:3000/api/annonce/', { title, address, price });
       return response.data;
     } catch (error) {
       console.error(error);

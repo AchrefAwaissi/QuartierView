@@ -31,3 +31,13 @@ exports.updateAnnonce = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.GetAnnonce = async (req, res, next) => {
+  try {
+    const annonces = await Annonce.find();
+    res.status(200).json(annonces);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+};
