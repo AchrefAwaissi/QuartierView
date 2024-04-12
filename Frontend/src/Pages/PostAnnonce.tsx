@@ -1,70 +1,72 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import AddHomeOutlinedIcon from '@mui/icons-material/AddHomeOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from 'axios'; // Import Axios
- 
-function Copyright(props: any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <a href="https://mui.com/" target="_blank" rel="noopener noreferrer">
-        Quartier Vue
-      </a>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
- 
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import AdresMas from '../Components/LocationAPI';
+import { TextField } from '@mui/material';
+
 const defaultTheme = createTheme();
- 
+
 export default function Publish() {
-  const [title, setTitle] = React.useState('');
-  const [address, setAddress] = React.useState('');
-  const [price, setPrice] = React.useState<number | null>(null); // Initialize price to null
-  const [formValid, setFormValid] = React.useState(false); // État pour suivre la validité du formulaire
- 
+  const navigate = useNavigate();
+  const [title, setTitle] = useState('');
+  const [address, setAddress] = useState('');
+  const [price, setPrice] = useState<number | null>(null);
+  const [formValid, setFormValid] = useState(false);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       await insertData(title, address, price);
       setTitle('');
       setAddress('');
-      setPrice(null); // Reset price to null after form submission
+      setPrice(null);
+      navigate('/ListeAnnonce');
     } catch (error) {
       console.error(error);
     }
   };
- 
+  
   const insertData = async (title: string, address: string, price: number | null) => {
     try {
-      const response = await axios.post('http://localhost:3000/api/annonce/add-produit', { title, address, price });
+      const response = await axios.post('http://localhost:3000/api/annonce', { title, address, price });
       return response.data;
     } catch (error) {
       console.error(error);
       throw new Error('Failed to insert data');
     }
   };
- 
+
+  const handleMapChange = (newAddress: string) => {
+    setAddress(newAddress);
+    // You can update location state here if necessary
+    setFormValid(validateForm());
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     if (name === 'title') {
       setTitle(value);
-    } else if (name === 'address') {
-      setAddress(value);
     } else if (name === 'price') {
-      setPrice(value === '' ? null : Number(value)); // Convert value to a number or null if empty
+      setPrice(value === '' ? null : Number(value));
     }
-    // Vérifier si tous les champs requis sont remplis
     setFormValid(title.trim() !== '' && address.trim() !== '' && (price !== null && !isNaN(price)));
+  };
+
+  const validateForm = (): boolean => {
+    return (
+      title.trim() !== '' &&
+      address.trim() !== '' &&
+      (price !== null && !isNaN(price))
+    );
   };
 
   return (
@@ -96,20 +98,11 @@ export default function Publish() {
                   name="title"
                   autoComplete="title"
                   value={title}
-                  onChange={handleInputChange} // Utiliser la fonction handleInputChange pour gérer le changement de la valeur
+                  onChange={handleInputChange}
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="address"
-                  label="Adresse"
-                  id="address"
-                  autoComplete="address"
-                  value={address}
-                  onChange={handleInputChange}
-                />
+                <AdresMas handleMapChange={handleMapChange} />
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -119,7 +112,7 @@ export default function Publish() {
                   label="Prix €"
                   id="price"
                   type='number'
-                  value={price === null ? '' : price.toString()} // Display empty string if price is null
+                  value={price === null ? '' : price.toString()}
                   onChange={handleInputChange}
                 />
               </Grid>
@@ -129,13 +122,12 @@ export default function Publish() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              disabled={!formValid} // Griser le bouton si le formulaire n'est pas valide
+              disabled={!formValid}
             >
               Publier
             </Button>
           </Box>
         </Box>
-        <Copyright />
       </Container>
     </ThemeProvider>
   );

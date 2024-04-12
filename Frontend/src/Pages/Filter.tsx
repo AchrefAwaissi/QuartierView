@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchAnnonce from './SearchAnnonce';
 
-const About = () => {
+const Filter = () => {
   return (
     <div>
      <SearchAnnonce></SearchAnnonce>
@@ -9,4 +9,4 @@ const About = () => {
   );
 }
 
-export default About;
+export default Filter;

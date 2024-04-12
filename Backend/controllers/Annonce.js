@@ -31,3 +31,37 @@ exports.updateAnnonce = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.GetAnnonce = async (req, res, next) => {
+  try {
+    const annonces = await Annonce.find();
+    res.status(200).json(annonces);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+exports.GetAnnonceByVille = async (req, res) => {
+  const ville = req.params.ville;
+  try {
+    const annonces = await Annonce.find({ address: ville });
+    res.status(200).json(annonces);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// get by price max
+
+exports.GetAnnonceByPriceMax = async (req, res) => {
+  try {
+    const annonces = await Annonce.find({ price: { $lte: req.params.price } });
+    res.status(200).json(annonces);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+};

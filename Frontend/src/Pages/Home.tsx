@@ -1,10 +1,10 @@
 import React from 'react';
-import PostAnnonce from './PostAnnonce';
+import Filter from './Filter';
 
 const Home = () => {
   return (
     <div>
-        <PostAnnonce></PostAnnonce>
+        <Filter></Filter>
      </div>
   );
 }

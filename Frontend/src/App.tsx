@@ -3,7 +3,10 @@ import './App.css';
 import Navbar from './Components/Navbar'; // Correction du nom du composant
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
-import About from "./Pages/About"; // Ajout de l'import pour la page About
+import ListeAnnonce from './Pages/ListeAnnonce';
+import PostAnnonce from './Pages/PostAnnonce';
+import GoogleMaps from './Components/LocationAPI';
+
 
 
 export default function App() {
@@ -13,12 +16,11 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path="/"  element={<Home />} /> 
-          <Route path="/about" element={<About />} />
+          <Route path="/ListeAnnonce" element={<ListeAnnonce />} />
+          <Route path="/PostAnnonce" element={<PostAnnonce />} />
         </Routes>
       </Router>
     </div>
   );
 }
-
-
 
