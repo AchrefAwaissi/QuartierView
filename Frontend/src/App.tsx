@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import ListeAnnonce from './Pages/ListeAnnonce';
 import PostAnnonce from './Pages/PostAnnonce';
+import GoogleMaps from './Components/LocationAPI';
 
 
 

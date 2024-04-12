@@ -1,0 +1,19 @@
+{
+    "swaggerDefinition": {
+      "info": {
+        "title": "swg",
+        "version": "1.0.0",
+        "description": " API",
+        "contact": {
+          "name": "qv"
+        },
+        "servers": [
+          "http://localhost:3000"
+        ]
+      }
+    },
+    "apis": [
+      "app.js",
+      "./routes/*.js"
+    ]
+  }

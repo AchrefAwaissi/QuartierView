@@ -17,13 +17,19 @@ exports.createAnnonce = (req, res, next) => {
 };
 exports.updateAnnonce = async (req, res) => {
   try {
+    const { id } = req.params; // Or const id = req.body.id
+
+    if (!id) {
+      return res.status(400).json({ message: "Missing advertisement ID" });
+    }
+
     const updatedAnnonce = await Annonce.findByIdAndUpdate(
-      req.params.id, 
-      req.body, 
-      { new: true } 
+      id,
+      req.body,
+      { new: true } // Return the updated document
     );
     if (!updatedAnnonce) {
-      return res.status(404).json({ message: "Annonce non trouvée" });
+      return res.status(404).json({ message: "Annonce not found" });
     }
     res.status(200).json({ message: "Annonce modifiée avec succès", updatedAnnonce });
   } catch (error) {
@@ -31,6 +37,8 @@ exports.updateAnnonce = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
 
 exports.GetAnnonce = async (req, res, next) => {
   try {
