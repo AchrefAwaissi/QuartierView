@@ -55,7 +55,6 @@ exports.GetAnnonceByVille = async (req, res) => {
   }
 };
 
-// get by price max
 
 exports.GetAnnonceByPriceMax = async (req, res) => {
   try {
