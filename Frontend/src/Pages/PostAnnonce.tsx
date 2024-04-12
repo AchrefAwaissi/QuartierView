@@ -11,6 +11,11 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios'; // Import Axios
 import { useNavigate } from 'react-router-dom';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import { SelectChangeEvent } from '@mui/material/Select';
 
 function Copyright(props: any) {
   return (
@@ -26,30 +31,32 @@ function Copyright(props: any) {
 }
  
 const defaultTheme = createTheme();
- 
+
 export default function Publish() {
   const navigate = useNavigate();
   const [title, setTitle] = React.useState('');
   const [address, setAddress] = React.useState('');
   const [price, setPrice] = React.useState<number | null>(null); // Initialize price to null
+  const [type, setType] = React.useState<string | null>(null); // Initialize type to null
   const [formValid, setFormValid] = React.useState(false); // État pour suivre la validité du formulaire
- 
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await insertData(title, address, price);
+      await insertData(title, address, price, type);
       setTitle('');
       setAddress('');
       setPrice(null); // Reset price to null after form submission
+      setType(null); // Reset type to null after form submission
       navigate('/ListeAnnonce'); // Use navigate to redirect to homepage
     } catch (error) {
       console.error(error);
     }
   };
  
-  const insertData = async (title: string, address: string, price: number | null) => {
+  const insertData = async (title: string, address: string, price: number | null, type: string | null) => {
     try {
-      const response = await axios.post('http://localhost:3000/api/annonce', { title, address, price });
+      const response = await axios.post('http://localhost:3000/api/annonce', { title, address, price, type });
       return response.data;
     } catch (error) {
       console.error(error);
@@ -68,6 +75,10 @@ export default function Publish() {
     }
     // Vérifier si tous les champs requis sont remplis
     setFormValid(title.trim() !== '' && address.trim() !== '' && (price !== null && !isNaN(price)));
+  };
+
+  const handleTypeChange = (event: SelectChangeEvent<string>) => {
+    setType(event.target.value);
   };
 
   return (
@@ -125,6 +136,21 @@ export default function Publish() {
                   value={price === null ? '' : price.toString()} // Display empty string if price is null
                   onChange={handleInputChange}
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl fullWidth>
+                  <InputLabel id="type-label">Type</InputLabel>
+                  <Select
+                    labelId="type-label"
+                    id="type"
+                    value={type || ''}
+                    label="Type"
+                    onChange={handleTypeChange}
+                  >
+                    <MenuItem value="maison">Maison</MenuItem>
+                    <MenuItem value="appartement">Appartement</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
             </Grid>
             <Button

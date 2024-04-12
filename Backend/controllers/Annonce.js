@@ -1,11 +1,12 @@
 const Annonce = require('../models/Annonce');
 
 exports.createAnnonce = (req, res, next) => {
-  const { title, price, address } = req.body;
+  const { title, price, address, type } = req.body;
   const produit = new Annonce({
     title,
     address,
     price,
+    type,
   });
   produit.save()
     .then(() => {
@@ -65,3 +66,15 @@ exports.GetAnnonceByPriceMax = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.GetAnnonceByType = async (req, res) => {
+  const type = req.params.type;
+  try {
+    const annonces = await Annonce.find({ type });
+    res.status(200).json(annonces);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+};
+

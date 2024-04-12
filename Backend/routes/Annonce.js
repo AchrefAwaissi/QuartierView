@@ -8,5 +8,6 @@ router.put('/annonce/:id',produitCtrl.updateAnnonce)
 router.get('/annonce',produitCtrl.GetAnnonce)
 router.get('/annonce/ville/:ville',produitCtrl.GetAnnonceByVille)
 router.get('/annonce/price/:price',produitCtrl.GetAnnonceByPriceMax)
+router.get('/annonces/type/:type', produitCtrl.GetAnnonceByType);
 
 module.exports = router;
