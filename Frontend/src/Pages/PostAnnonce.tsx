@@ -16,6 +16,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import { SelectChangeEvent } from '@mui/material/Select';
+import AdresMas from '../Components/LocationAPI';
 
 function Copyright(props: any) {
   return (
@@ -53,7 +54,13 @@ export default function Publish() {
       console.error(error);
     }
   };
- 
+  
+  const handleMapChange = (newAddress: string) => {
+    setAddress(newAddress);
+    // You can update location state here if necessary
+    setFormValid(validateForm());
+  };
+
   const insertData = async (title: string, address: string, price: number | null, type: string | null) => {
     try {
       const response = await axios.post('http://localhost:3000/api/annonce', { title, address, price, type });
@@ -75,6 +82,14 @@ export default function Publish() {
     }
     // Vérifier si tous les champs requis sont remplis
     setFormValid(title.trim() !== '' && address.trim() !== '' && (price !== null && !isNaN(price)));
+  };
+
+  const validateForm = (): boolean => {
+    return (
+      title.trim() !== '' &&
+      address.trim() !== '' &&
+      (price !== null && !isNaN(price))
+    );
   };
 
   const handleTypeChange = (event: SelectChangeEvent<string>) => {
@@ -114,16 +129,7 @@ export default function Publish() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="address"
-                  label="Adresse"
-                  id="address"
-                  autoComplete="address"
-                  value={address}
-                  onChange={handleInputChange}
-                />
+                <AdresMas handleMapChange={handleMapChange} />
               </Grid>
               <Grid item xs={12}>
                 <TextField
