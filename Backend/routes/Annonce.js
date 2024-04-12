@@ -3,6 +3,10 @@ const router = express.Router();
 const produitCtrl = require('../controllers/Annonce');
 
 
-router.post('/add-produit',produitCtrl.createAnnonce)
+router.post('/annonce',produitCtrl.createAnnonce)
+router.put('/annonce/:id',produitCtrl.updateAnnonce)
+router.get('/annonce',produitCtrl.GetAnnonce)
+router.get('/annonce/ville/:ville',produitCtrl.GetAnnonceByVille)
+router.get('/annonce/price/:price',produitCtrl.GetAnnonceByPriceMax)
 
 module.exports = router;

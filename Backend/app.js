@@ -6,7 +6,7 @@ const AnnonceRoutes = require('./routes/Annonce');
 
 const userRoutes = require('./routes/user');
 //mongo db connection
-const mongoURI = 'Met ta base ilies et fffff.......lllllaa';
+const mongoURI = 'mongodb+srv://root:root@cluster0.xoxfzvh.mongodb.net/';
 console.log(mongoURI)
 
 // Connecter à MongoDB
@@ -26,5 +26,5 @@ app.use((req, res, next) => {
   
 app.use(bodyParser.json());
 app.use('/api/auth', userRoutes);
-app.use('/api/annonce', AnnonceRoutes);
+app.use('/api', AnnonceRoutes);
 module.exports = app;
