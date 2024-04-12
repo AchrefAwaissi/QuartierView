@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, TextField, Button, Typography, Card, CardContent } from '@mui/material';
+import { Grid, TextField, Button, Typography, Card, CardContent, Checkbox } from '@mui/material';
 import { styled } from '@mui/system';
 import axios from 'axios';
 
@@ -89,6 +89,12 @@ const SearchAnnonce = () => {
                   value={ville}
                   onChange={(e) => setVille(e.target.value)}
                 />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Checkbox defaultChecked /> Maison
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Checkbox defaultChecked /> Appartement
               </Grid>
               <Grid item xs={12}>
                 <TextField
