@@ -40,7 +40,7 @@ Lancez le serveur backendfrontend :
 npm start
 ```
 Le frontend devrait maintenant être accessible à l’adresse http://localhost:3001.
-## License
+## Licence
 
 Ce projet est sous licence [MIT](https://choosealicense.com/licenses/mit/) Consultez le fichier LICENSE pour plus d’informations.
 
