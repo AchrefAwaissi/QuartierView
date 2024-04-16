@@ -2,8 +2,6 @@
 # Quartier View
 
 Quartier View est une application qui permet aux utilisateurs de rechercher des logements en location. 
-
-
 ## Installation
 
 1. Clonez ce dépôt :
@@ -40,6 +38,10 @@ Lancez le serveur frontend :
 npm start
 ```
 Le frontend devrait maintenant être accessible à l’adresse http://localhost:3001.
+## 🔗 Contributeurs
+[![github](https://img.shields.io/badge/Achref-000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AchrefAwaissi) 
+[![github](https://img.shields.io/badge/Ilies-000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/iliesskalli)
+[![github](https://img.shields.io/badge/JK-001?style=for-the-badge&logo=github&logoColor=white)](https://github.com/john1340a)
 ## Licence
 
 Ce projet est sous licence [MIT](https://choosealicense.com/licenses/mit/) Consultez le fichier LICENCE pour plus d’informations.
