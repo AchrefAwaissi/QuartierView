@@ -7,7 +7,7 @@ const SwaggerOptions = require('./swagger/swagger.json');
 const swaggerDocument = swaggerJsDoc(SwaggerOptions);
 const app = express();
 const AnnonceRoutes = require('./routes/Annonce');
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/User');
 
 const mongoURI = 'mongodb+srv://root:root@cluster0.xoxfzvh.mongodb.net/';
 
