@@ -9,7 +9,7 @@ const app = express();
 const AnnonceRoutes = require('./routes/Annonce');
 const userRoutes = require('./routes/User');
 
-const mongoURI = 'mongodb+srv://root:root@cluster0.xoxfzvh.mongodb.net/';
+const mongoURI = 'mongodb+srv://swyt:M4iRa6Z4OcNfErn8@cluster0.ywgj5y6.mongodb.net/';
 
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,

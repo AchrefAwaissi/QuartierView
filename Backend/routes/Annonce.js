@@ -11,6 +11,7 @@ const produitCtrl = require('../controllers/Annonce');
  *       - title
  *       - address
  *       - price
+ *       - type
  *     properties:
  *       title:
  *         type: string
@@ -19,6 +20,11 @@ const produitCtrl = require('../controllers/Annonce');
  *       price:
  *         type: number
  *         format: double
+ *       type:
+ *         type: string
+ *         enum:
+ *           - maison
+ *           - appartement
  */
 
 /**
@@ -78,63 +84,5 @@ router.put('/annonce/:id', produitCtrl.updateAnnonce);
  *         description: Annonces récupérées avec succès.
  */
 router.get('/annonce', produitCtrl.GetAnnonce);
-
-/**
- * @swagger
- * /annonce/ville/{ville}:
- *   get:
- *     description: Récupérer les annonces par ville
- *     produces:
- *       - application/json
- *     parameters:
- *       - in: path
- *         name: ville
- *         description: Nom de la ville
- *         required: true
- *         type: string
- *     responses:
- *       '200':
- *         description: Annonces récupérées avec succès.
- */
-router.get('/annonce/ville/:ville', produitCtrl.GetAnnonceByVille);
-
-/**
- * @swagger
- * /annonce/price/{price}:
- *   get:
- *     description: Récupérer les annonces par prix maximum
- *     produces:
- *       - application/json
- *     parameters:
- *       - in: path
- *         name: price
- *         description: Prix maximum
- *         required: true
- *         type: number
- *     responses:
- *       '200':
- *         description: Annonces récupérées avec succès.
- */
-router.get('/annonce/price/:price', produitCtrl.GetAnnonceByPriceMax);
-
-/**
- * @swagger
- * /annonce/type/{type}:
- *   get:
- *     description: Récupérer les annonces par type
- *     produces:
- *       - application/json
- *     parameters:
- *       - in: path
- *         name: type
- *         description: Type de l'annonce
- *         required: true
- *         type: string
- *     responses:
- *       '200':
- *         description: Annonces récupérées avec succès.
- */
-
-router.get('/annonces/type/:type', produitCtrl.GetAnnonceByType);
 
 module.exports = router;

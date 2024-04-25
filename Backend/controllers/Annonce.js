@@ -34,46 +34,27 @@ exports.updateAnnonce = async (req, res) => {
 };
 
 exports.GetAnnonce = async (req, res, next) => {
-  try {
-    const annonces = await Annonce.find();
-    res.status(200).json(annonces);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error.message });
+  const filter = {}
+  if (req.query.address) {
+    const address = req.query.address
+    const ville = address.split(", ")[0]
+    filter.address = { $regex: `.*\\b${ville}\\b.*`, $options: 'i' }
   }
-};
-
-
-exports.GetAnnonceByVille = async (req, res) => {
-  const ville = req.params.ville;
-  try {
-    const annonces = await Annonce.find({ address: ville });
-    res.status(200).json(annonces);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error.message });
+  if (req.query.maxPrice) {
+    filter.price = { $lte: req.query.maxPrice }
   }
-};
-
-
-exports.GetAnnonceByPriceMax = async (req, res) => {
-  try {
-    const annonces = await Annonce.find({ price: { $lte: req.params.price } });
-    res.status(200).json(annonces);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error.message });
+  if (req.query.type) {
+    filter.type = req.query.type
   }
-};
-
-exports.GetAnnonceByType = async (req, res) => {
-  const type = req.params.type;
   try {
-    const annonces = await Annonce.find({ type });
-    res.status(200).json(annonces);
+    const annonces = await Annonce.find(filter)
+    res.status(200).json(annonces)
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error.message });
+    console.error(error)
+    res.status(500).json({ error: error.message })
   }
-};
+}
+
+
+
 
