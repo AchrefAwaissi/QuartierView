@@ -43,11 +43,12 @@ const SearchAnnonce = () => {
 
       // Construire la requête API en fonction des filtres
       let params = [];
-      if (ville) params.push(`ville=${encodeURIComponent(ville)}`);
-      if (prixMax) params.push(`price=${encodeURIComponent(prixMax)}`);
+      if (ville) params.push(`address=${encodeURIComponent(ville)}`);
+      if (prixMax) params.push(`maxPrice=${encodeURIComponent(prixMax)}`);
       if (isMaisonChecked) params.push('type=maison');
       if (isAppartementChecked) params.push('type=appartement');
-      if (params.length > 0) apiUrl += `?${params.join('&')}`;
+      if (params.length > 0) apiUrl += `?${params.join('&')}`
+      else apiUrl += '/';
 
       const response = await axios.get(apiUrl);
       let filteredResults = response.data;

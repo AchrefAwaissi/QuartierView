@@ -7,7 +7,6 @@ const SwaggerOptions = require('./swagger/swagger.json');
 const swaggerDocument = swaggerJsDoc(SwaggerOptions);
 const app = express();
 const AnnonceRoutes = require('./routes/Annonce');
-const userRoutes = require('./routes/User');
 
 const mongoURI = 'mongodb+srv://swyt:M4iRa6Z4OcNfErn8@cluster0.ywgj5y6.mongodb.net/';
 
@@ -28,8 +27,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-app.use('/api/auth', userRoutes);
 
 app.use('/api', AnnonceRoutes);
 
